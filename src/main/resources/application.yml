@@ -1,0 +1,6 @@
+spring:
+  application.name: katsudon-binder-server
+  data.mongodb.uri: ${config.mongo.db.uri}
+
+server.port: ${config.server.port}
+server.error.include-message: always
