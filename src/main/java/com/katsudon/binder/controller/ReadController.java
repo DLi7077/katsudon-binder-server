@@ -7,6 +7,7 @@ import com.katsudon.binder.repository.ExpansionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +20,11 @@ public class ReadController {
   final ExpansionRepository expansionRepository;
 
   @GetMapping("/cards")
-  public List<Card> findCards() {
+  public List<Card> findCards(@RequestParam List<String> rarity, @RequestParam List<String> set,
+                              @RequestParam String name, @RequestParam(defaultValue = "setReleaseDate") String orderBy,
+                              @RequestParam(defaultValue = "desc") String orderDir, @RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "100") int pageSize) {
+
     return cardRepository.findAll();
   }
 
