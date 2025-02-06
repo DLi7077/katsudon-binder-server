@@ -4,6 +4,7 @@ import com.katsudon.binder.model.entity.Card;
 import com.katsudon.binder.model.entity.ExpansionSet;
 import com.katsudon.binder.repository.CardRepository;
 import com.katsudon.binder.repository.ExpansionRepository;
+import com.katsudon.binder.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ReadController {
   final CardRepository cardRepository;
   final ExpansionRepository expansionRepository;
+  final CardService cardService;
 
   @GetMapping("/cards")
   public List<Card> findCards(@RequestParam List<String> rarity, @RequestParam List<String> set,
@@ -25,7 +27,7 @@ public class ReadController {
                               @RequestParam(defaultValue = "desc") String orderDir, @RequestParam(defaultValue = "1") int page,
                               @RequestParam(defaultValue = "100") int pageSize) {
 
-    return cardRepository.findAll();
+    return cardService.find(rarity, set, name, orderBy, orderDir, page, pageSize);
   }
 
   @GetMapping("/expansion")
