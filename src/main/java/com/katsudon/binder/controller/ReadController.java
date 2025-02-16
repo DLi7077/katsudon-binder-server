@@ -27,14 +27,17 @@ public class ReadController {
   }
 
   @GetMapping("/cards")
-  public List<Card> findCards(@RequestParam(required = false) List<String> rarity,
-                              @RequestParam(required = false) List<String> set,
-                              @RequestParam(required = false) String name,
-                              @RequestParam(defaultValue = "setReleaseDate") String orderBy,
-                              @RequestParam(defaultValue = "desc") String orderDir,
-                              @RequestParam(defaultValue = "1") int page,
-                              @RequestParam(defaultValue = "100") int pageSize) {
-    return cardService.find(rarity, set, name, orderBy, orderDir, page, pageSize);
+  public List<Card> findCards(
+          @RequestParam(required = false) List<String> rarity,
+          @RequestParam(required = false) List<String> expansionSet,
+          @RequestParam(required = false) String name,
+          @RequestParam(required = false) String artist,
+          @RequestParam(defaultValue = "setReleaseDate") String orderBy,
+          @RequestParam(defaultValue = "desc") String orderDir,
+          @RequestParam(defaultValue = "1") int page,
+          @RequestParam(defaultValue = "100") int pageSize
+  ) {
+    return cardService.find(rarity, expansionSet, name, artist, orderBy, orderDir, page, pageSize);
   }
 
   @GetMapping("/expansion")

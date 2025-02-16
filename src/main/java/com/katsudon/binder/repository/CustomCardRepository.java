@@ -18,18 +18,25 @@ public class CustomCardRepository {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public List<Card> findCards(List<String> rarity, List<String> set, String name,
-                                String orderBy, String orderDir, int page, int pageSize) {
-        Query query = new Query();
+    public List<Card> findCards(
+            List<String> rarity, List<String> expansionSet,
+            String name, String artist,
+            String orderBy, String orderDir,
+            int page, int pageSize
+    ) {
 
+        Query query = new Query();
         if (rarity != null && !rarity.isEmpty()) {
             query.addCriteria(Criteria.where("rarity").in(rarity));
         }
-        if (set != null && !set.isEmpty()) {
-            query.addCriteria(Criteria.where("expansionName").in(set));
+        if (expansionSet != null && !expansionSet.isEmpty()) {
+            query.addCriteria(Criteria.where("expansionName").in(expansionSet));
         }
         if (name != null && !name.isEmpty()) {
-            query.addCriteria(Criteria.where("name").regex(name, "i")); // Case-insensitive search
+            query.addCriteria(Criteria.where("name").regex(name, "i"));
+        }
+        if (artist != null && !artist.isEmpty()) {
+            query.addCriteria(Criteria.where("artist").regex(artist, "i"));
         }
 
         Sort.Direction direction = orderDir.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
