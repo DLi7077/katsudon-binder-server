@@ -21,12 +21,19 @@ public class ReadController {
   final ExpansionRepository expansionRepository;
   final CardService cardService;
 
-  @GetMapping("/cards")
-  public List<Card> findCards(@RequestParam List<String> rarity, @RequestParam List<String> set,
-                              @RequestParam String name, @RequestParam(defaultValue = "setReleaseDate") String orderBy,
-                              @RequestParam(defaultValue = "desc") String orderDir, @RequestParam(defaultValue = "1") int page,
-                              @RequestParam(defaultValue = "100") int pageSize) {
+  @GetMapping("/penis")
+  public String penis() {
+    return "penis";
+  }
 
+  @GetMapping("/cards")
+  public List<Card> findCards(@RequestParam(required = false) List<String> rarity,
+                              @RequestParam(required = false) List<String> set,
+                              @RequestParam(required = false) String name,
+                              @RequestParam(defaultValue = "setReleaseDate") String orderBy,
+                              @RequestParam(defaultValue = "desc") String orderDir,
+                              @RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "100") int pageSize) {
     return cardService.find(rarity, set, name, orderBy, orderDir, page, pageSize);
   }
 
