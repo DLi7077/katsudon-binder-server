@@ -21,11 +21,6 @@ public class ReadController {
   final ExpansionRepository expansionRepository;
   final CardService cardService;
 
-  @GetMapping("/penis")
-  public String penis() {
-    return "penis";
-  }
-
   @GetMapping("/cards")
   public List<Card> findCards(
           @RequestParam(required = false) List<String> rarity,
